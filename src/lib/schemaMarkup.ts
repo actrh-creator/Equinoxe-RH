@@ -115,7 +115,7 @@ export const personSchema = {
   '@type': 'Person',
   name: 'Caroline Tillou Maratuech',
   description: "Docteure en gestion des ressources humaines, enseignante-chercheuse à TBS Education, consultante RH et professionnelle de l'accompagnement individuel. Fondatrice d'ACT&RH.",
-  jobTitle: 'Docteure en gestion des ressources humaines, enseignante-chercheuse, consultante RH et coach professionnelle',
+  jobTitle: "Docteure en gestion des ressources humaines, enseignante-chercheuse, consultante RH et professionnelle de l'accompagnement individuel",
   honorificSuffix: 'Docteure en GRH',
   worksFor: { '@type': 'Organization', name: 'ACT&RH', url: baseUrl },
   alumniOf: 'Doctorat en Gestion des Ressources Humaines',
@@ -181,7 +181,7 @@ export function serviceSchema(service: Service) {
     },
     description: service.shortDescription,
     url: `${baseUrl}/services/${service.slug}`,
-    serviceType: 'Conseil RH et coaching professionnel',
+    serviceType: 'Conseil RH et accompagnement individuel',
     offers: {
       '@type': 'Offer',
       url: `${baseUrl}/contact`,

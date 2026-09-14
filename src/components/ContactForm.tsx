@@ -73,15 +73,15 @@ export function ContactForm() {
         </div>
 
         <div className="success-text space-y-4 max-w-sm">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-champagne-dark">Demande envoyee</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-champagne-dark">Demande envoyée</p>
           <h2 className="font-serif text-3xl font-semibold text-ink leading-snug">
             Merci{firstName ? `, ${firstName}` : ''} !
           </h2>
           <p className="text-base leading-7 text-anthracite/70">
-            Votre message a bien ete recu. Caroline Tillou Maratuech reviendra vers vous dans les plus brefs delais afin d&apos;echanger sur votre situation et vos besoins.
+            Votre message a bien été reçu. Caroline Tillou Maratuech reviendra vers vous dans les plus brefs délais afin d&apos;échanger sur votre situation et vos besoins.
           </p>
           <p className="text-sm text-anthracite/50">
-            Un email de confirmation vous a ete envoye.
+            Un email de confirmation vous a été envoyé.
           </p>
         </div>
 
@@ -101,25 +101,25 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} className="grid gap-4 rounded-2xl border border-ink/10 bg-white p-6 shadow-[0_18px_44px_rgba(31,51,71,0.06)]">
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Prenom"><input required className={input} value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} /></Field>
+        <Field label="Prénom"><input required className={input} value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} /></Field>
         <Field label="Nom"><input required className={input} value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} /></Field>
         <Field label="Email"><input required type="email" className={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></Field>
-        <Field label="Telephone"><input className={input} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></Field>
+        <Field label="Téléphone"><input className={input} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></Field>
       </div>
       <div className="grid gap-4 sm:grid-cols-3">
-        <Field label="Profil"><Select value={form.profile_type} onChange={(v) => setForm({ ...form, profile_type: v })} options={['entreprise', 'dirigeant', 'manager', 'salarie', 'entrepreneur', 'etudiant', 'particulier', 'autre']} /></Field>
-        <Field label="Besoin"><Select value={form.need_type} onChange={(v) => setForm({ ...form, need_type: v })} options={['conseil RH', 'accompagnement du changement', 'accompagnement individuel', 'bilan de competences', 'formation / atelier', 'autre']} /></Field>
-        <Field label="Preference"><Select value={form.preferred_contact} onChange={(v) => setForm({ ...form, preferred_contact: v })} options={['telephone', 'email', 'visioconference']} /></Field>
+        <Field label="Profil"><Select value={form.profile_type} onChange={(v) => setForm({ ...form, profile_type: v })} options={['entreprise', 'dirigeant', 'manager', 'salarié', 'entrepreneur', 'étudiant', 'particulier', 'autre']} /></Field>
+        <Field label="Besoin"><Select value={form.need_type} onChange={(v) => setForm({ ...form, need_type: v })} options={['conseil RH', 'accompagnement du changement', 'accompagnement individuel', 'bilan de compétences', 'formation / atelier', 'autre']} /></Field>
+        <Field label="Préférence"><Select value={form.preferred_contact} onChange={(v) => setForm({ ...form, preferred_contact: v })} options={['téléphone', 'email', 'visioconférence']} /></Field>
       </div>
       <Field label="Message"><textarea required className={`${input} min-h-36`} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} /></Field>
       <label className="flex gap-3 text-sm leading-6 text-anthracite/75">
         <input required type="checkbox" checked={form.consent} onChange={(e) => setForm({ ...form, consent: e.target.checked })} />
-        J&apos;accepte que les informations transmises soient utilisees pour repondre a ma demande.
+        J&apos;accepte que les informations transmises soient utilisées pour répondre à ma demande.
       </label>
       <button disabled={status === 'loading'} className="focus-ring rounded-lg bg-sage px-6 py-3 font-semibold text-white shadow-[0_12px_28px_rgba(111,143,130,0.22)] transition hover:bg-sage-dark disabled:opacity-60">
         {status === 'loading' ? 'Envoi en cours...' : 'Envoyer ma demande'}
       </button>
-      {status === 'error' ? <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">Le message n&apos;a pas pu etre transmis. Vous pouvez aussi ecrire directement a contact.actrh@gmail.com.</p> : null}
+      {status === 'error' ? <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">Le message n&apos;a pas pu être transmis. Vous pouvez aussi écrire directement à contact.actrh@gmail.com.</p> : null}
     </form>
   );
 }

@@ -118,7 +118,7 @@ export function HomePage() {
                 ['Docteure en GRH', GraduationCap, 'Gestion des ressources humaines'],
                 ['+ 20 ans', Award, 'De recherche et de pratique'],
                 ['Enseignante-chercheuse', Users, 'TBS Education'],
-                ['Consultante RH', MapPin, 'Et accompagnement individuel']
+                ['Consultante RH', MapPin, 'Professionnelle de l’accompagnement individuel']
               ].map(([label, Icon, desc]) => (
                 <div key={String(label)} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-sage/20">
                   <span className="rounded-full bg-sage px-2.5 py-2.5 text-white"><Icon size={18} /></span>
@@ -153,7 +153,7 @@ export function HomePage() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">Références et collaborations</h2>
-              <p className="mt-4 max-w-2xl text-lg leading-8 text-anthracite/70">Ils nous font confiance</p>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-anthracite/70">Organisations, établissements et partenaires avec lesquels j’ai travaillé</p>
             </div>
             <button
               onClick={() => setReferencesOpen((o) => !o)}
@@ -461,7 +461,7 @@ export function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-ink/35 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 rounded-full border border-white/50 bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-ink backdrop-blur">
-                  Clarifier / Sécuriser / Faire progresser
+                  Comprendre / Clarifier / Faire progresser
                 </div>
               </div>
 

@@ -57,7 +57,7 @@ const audienceContent: Record<string, any> = {
     icon: Shuffle,
     eyebrow: 'Pour votre carrière',
     description: 'Faire le point sur votre parcours, identifier vos forces et dessiner votre prochain projet.',
-    longDescription: 'Que vous soyez en poste, en recherche ou en questionnement, nous vous offrons un cadre sécurisé pour explorer vos possibles et valider vos choix professionnels.',
+    longDescription: 'Que vous soyez en poste, en recherche ou en questionnement, je vous propose un cadre sécurisé pour explorer vos possibles et valider vos choix professionnels.',
     challenges: [
       'Perte de sens dans les missions actuelles',
       'Envie de reconversion ou d’évolution interne',
@@ -67,7 +67,7 @@ const audienceContent: Record<string, any> = {
     examples: [
       'Bilan de compétences complet pour valider un projet de reconversion.',
       'Accompagnement à la préparation d’entretiens de recrutement stratégiques.',
-      'Soutien psychologique et professionnel suite à un burn-out ou licenciement.'
+      'Accompagnement professionnel à la suite d’un épuisement professionnel ou d’un licenciement.'
     ],
     relatedServices: ['bilan-de-competences', 'accompagnement-individuel']
   },
@@ -76,7 +76,7 @@ const audienceContent: Record<string, any> = {
     icon: Lightbulb,
     eyebrow: 'Pour les créateurs',
     description: 'Poser les fondations RH de votre projet et anticiper les premiers recrutements.',
-    longDescription: 'L’aventure entrepreneuriale nécessite une vision claire dès les premières étapes. Nous vous accompagnons pour que l’humain soit un moteur de votre réussite dès le premier jour.',
+    longDescription: 'L’aventure entrepreneuriale nécessite une vision claire dès les premières étapes. Je vous accompagne pour que l’humain soit un moteur de votre réussite dès le premier jour.',
     challenges: [
       'Rédaction des premières fiches de poste et stratégie de recrutement',
       'Définition des valeurs et de la marque employeur',

@@ -186,8 +186,8 @@ export function AboutPage() {
                   {([
                     ['Doctorat en Gestion des Ressources Humaines', GraduationCap, true],
                     ['Coach Consultante certifiée RNCP Niveau 7', Users, false],
-                    ['+ 20 ans de pratique terrain', Award, true],
-                    ['Approche centrée sur l\'humain', Heart, false],
+                    ['Plus de 20 ans de recherche et de pratique', Award, true],
+                    ['Une approche fondée sur la recherche et la réalité du terrain', Heart, false],
                   ] as const).map(([title, Icon, isGold]) => (
                     <div key={String(title)} className="flex items-center gap-3.5">
                       <span className={`rounded-full p-2 ${isGold ? 'bg-champagne/15 text-champagne-dark' : 'bg-sage/20 text-sage-dark'}`}>

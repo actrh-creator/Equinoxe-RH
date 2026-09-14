@@ -75,15 +75,15 @@ const pressSections: PressSection[] = [
         title: 'Table ronde MEDEF 31 - Entrepreneurs, collaborateurs, en quête de sens au travail',
         date: '7 décembre 2022',
         themes: 'Quête de sens au travail, engagement, burnout, grande démission, rôle du manager',
-        text: 'Invitée par le MEDEF 31, Caroline Tillou Maratuech intervient comme chercheuse en GRH à TBS Education et gérante d’ACT&RH RH dans une table ronde sur la quête de sens au travail. Face à un dirigeant, un représentant d’Harmonie Mutuelle et un médecin du travail, elle décrypte les nouvelles attentes des collaborateurs, les risques de désengagement et les leviers concrets pour redonner du sens au quotidien.',
+        text: 'Invitée par le MEDEF 31, Caroline Tillou Maratuech intervient comme chercheuse en GRH à TBS Education et fondatrice d’ACT&RH dans une table ronde sur la quête de sens au travail. Face à un dirigeant, un représentant d’Harmonie Mutuelle et un médecin du travail, elle décrypte les nouvelles attentes des collaborateurs, les risques de désengagement et les leviers concrets pour redonner du sens au quotidien.',
         link: 'https://www.youtube.com/watch?v=F-eDjnBROAc',
         cta: 'Voir la vidéo'
       }
     ]
   },
   {
-    title: 'Présence professionnelle & expertise',
-    intro: 'Une présence professionnelle qui relie recherche académique, enseignement, conseil RH et accompagnement des organisations.',
+    title: 'Repères professionnels et institutionnels',
+    intro: 'Une présence professionnelle qui relie recherche académique, enseignement, conseil RH et accompagnement individuel.',
     icon: BadgeCheck,
     items: [
       {
@@ -95,26 +95,10 @@ const pressSections: PressSection[] = [
         cta: 'En savoir plus'
       },
       {
-        title: 'Equinoxe Conseil RH',
-        date: 'Site de cabinet',
-        themes: 'Conseil RH, coaching individuel, coaching d’équipe, leadership, accompagnement du changement',
-        text: 'Avec Equinoxe Conseil RH, Caroline accompagne dirigeants, managers et équipes dans les moments clés de leur évolution professionnelle. Une offre sur-mesure de conseil RH et de coaching individuel et collectif pour travailler le leadership, la performance, l’alignement avec le sens et l’équilibre vie professionnelle / vie personnelle.',
-        link: 'https://www.linkedin.com/in/caroline-maratuech-089050357/',
-        cta: 'Découvrir Equinoxe Conseil RH'
-      },
-      {
-        title: 'ACT&RH - Notre expertise',
-        date: 'Site de cabinet',
-        themes: 'Raison d’être, RSE, évolution des modèles managériaux et organisationnels, capital humain',
-        text: 'Sur le site ACT&RH, l’expertise mise en avant vise à aider les organisations à révéler leur raison d’être, structurer leur démarche RSE et faire évoluer leurs modèles managériaux autour du capital humain. On y retrouve la conviction que la performance durable passe par des pratiques managériales alignées avec le sens, la santé et l’engagement des équipes.',
-        link: '/services',
-        cta: 'Découvrir notre expertise'
-      },
-      {
         title: 'Profil LinkedIn',
         date: 'Profil professionnel',
-        themes: 'Enseignante-chercheuse TBS Education, consultante RH, coach en entreprise',
-        text: 'Sur LinkedIn, Caroline Tillou Maratuech se présente comme consultante coach en entreprise, enseignante-chercheuse en management des ressources humaines à TBS Education et consultante RH pour ACT&RH. Son profil illustre la continuité entre ses recherches académiques et ses interventions de terrain auprès des dirigeants et de leurs équipes.',
+        themes: 'Enseignante-chercheuse TBS Education, consultante RH, accompagnement individuel',
+        text: 'Sur LinkedIn, Caroline Tillou Maratuech se présente comme consultante RH et professionnelle de l’accompagnement individuel, enseignante-chercheuse en management des ressources humaines à TBS Education et consultante RH pour ACT&RH. Son profil illustre la continuité entre ses recherches académiques et ses interventions de terrain auprès des dirigeants et de leurs équipes.',
         link: 'https://www.linkedin.com/in/caroline-tillou-maratuech-2b30372a',
         cta: 'Voir le profil'
       }
@@ -127,17 +111,17 @@ export function PressPage() {
     <>
       <SEOHead
         title="On parle de nous | Publications et interventions médias | ACT&RH"
-        description="Publications scientifiques, interventions médias et présence professionnelle de Caroline Tillou Maratuech, consultante RH, coach et enseignante-chercheuse."
+        description="Publications scientifiques, interventions médias et présence professionnelle de Caroline Tillou Maratuech, consultante RH et professionnelle de l’accompagnement individuel."
       />
       <PageHeader
         eyebrow="On parle de nous"
         title="Publications et interventions médias"
-        text="Chercheuse en management des ressources humaines, consultante RH et coach, Caroline Tillou Maratuech est régulièrement publiée dans des revues scientifiques et intervient sur le sens au travail, l’engagement et la santé au travail."
+        text="Chercheuse en management des ressources humaines, consultante RH et professionnelle de l’accompagnement individuel, Caroline Tillou Maratuech est régulièrement publiée dans des revues scientifiques et intervient sur le sens au travail, l’engagement et la santé au travail."
       />
 
       <section className="border-b border-sand bg-ivory py-10">
         <Container>
-          <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">Ils nous font confiance</p>
+          <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">Organisations, établissements et partenaires avec lesquels j’ai travaillé</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-5">
             {trustedLogos.map((logo) => (
               <div key={logo.name} className="flex h-16 w-36 shrink-0 items-center justify-center rounded-xl border border-ink/5 bg-white px-4 shadow-[0_10px_30px_rgba(14,27,41,0.04)]">

@@ -32,7 +32,7 @@ export function SEOHead({ title, description, canonical, image, type = 'website'
     upsertMeta('property', 'og:url', pageUrl);
     upsertMeta('property', 'og:image', absoluteImage);
     upsertMeta('property', 'og:image:secure_url', absoluteImage);
-    upsertMeta('property', 'og:image:alt', 'ACT&RH - conseil RH, coaching et accompagnement professionnel');
+    upsertMeta('property', 'og:image:alt', 'ACT&RH - conseil RH et accompagnement professionnel et personnel');
     upsertMeta('property', 'og:image:width', '1200');
     upsertMeta('property', 'og:image:height', '630');
     upsertMeta('name', 'twitter:card', 'summary_large_image');

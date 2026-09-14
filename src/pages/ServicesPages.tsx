@@ -63,7 +63,7 @@ const serviceEditorialContent: Record<string, {
     introTitle: 'Un appui RH externe pour décider avec plus de recul',
     introParagraphs: [
       "Les décisions RH engagent durablement l'entreprise. Lorsqu'une situation devient complexe, un regard extérieur permet souvent de clarifier les enjeux et d'identifier les meilleures options.",
-      "J'accompagne les dirigeants, managers et responsables RH dans l'analyse de leurs problématiques humaines et organisationnelles : évolution des équipes, recrutement, tensions relationnelles, transformations ou structuration des pratiques RH. Mon intervention apporte une vision objective, des outils éprouvés et des recommandations concrètes pour sécuriser les décisions, faciliter l'action et concilier performance de l'entreprise et qualité des relations de travail."
+      "Mon intervention apporte une vision objective, des outils éprouvés et des recommandations concrètes pour sécuriser les décisions, faciliter l'action et concilier performance de l'entreprise et qualité des relations de travail."
     ],
     sideNote: {
       eyebrow: 'Enjeu entreprise',
@@ -89,7 +89,6 @@ const serviceEditorialContent: Record<string, {
   'accompagnement-changement': {
     introTitle: 'Préparer les transitions sans perdre le sens ni l’engagement',
     introParagraphs: [
-      "Le changement ne se décrète pas. Il se construit avec celles et ceux qui le vivent au quotidien.",
       "J'aide les dirigeants, managers et équipes à comprendre les enjeux de la transformation, à exprimer leurs préoccupations et à participer activement à la mise en œuvre des évolutions attendues. Grâce à une approche fondée sur l'écoute, le dialogue et la mobilisation collective, je facilite l'appropriation du changement, limite les résistances et favorise une transition durable, cohérente avec les objectifs de l'organisation et les réalités du terrain."
     ],
     sideNote: {
