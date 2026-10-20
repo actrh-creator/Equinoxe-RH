@@ -101,7 +101,7 @@ export function HomePage() {
                 <img
                   src={heroImg ?? "https://xuuvxhvmndkqkcmgptot.supabase.co/storage/v1/object/public/site-images/hero/caroline-maratuech-act-rh-toulouse-1.webp"}
                   alt="Caroline Tillou Maratuech — Consultante RH et accompagnement individuel, ACT&RH"
-                  onError={(event) => { event.currentTarget.src = '/images/Professeur TILLOU Caroline - TBS Education.webp'; }}
+                  onError={(event) => { event.currentTarget.src = 'https://xuuvxhvmndkqkcmgptot.supabase.co/storage/v1/object/public/site-images/hero/c.tillou.webp'; }}
                   className="aspect-[4/5] h-full w-full rounded-[1.5rem] object-cover object-center sm:aspect-square"
                 />
                 <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/70 bg-white/90 p-5 shadow-[0_18px_40px_rgba(14,27,41,0.06)] backdrop-blur">

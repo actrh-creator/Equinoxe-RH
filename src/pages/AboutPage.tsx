@@ -7,15 +7,22 @@ import { supabase } from '../lib/supabaseClient';
 
 export function AboutPage() {
   const [cabinetImg, setCabinetImg] = useState<string | null>(null);
+  const [photoReady, setPhotoReady] = useState(false);
 
   useEffect(() => {
-    if (!supabase) return;
+    if (!supabase) { setPhotoReady(true); return; }
     supabase.from('site_settings').select('value').eq('key', 'cabinet_image_url').single()
-      .then(({ data }) => { if (data?.value) setCabinetImg(data.value); });
+      .then(({ data }) => {
+        if (data?.value) setCabinetImg(data.value);
+        setPhotoReady(true);
+      });
   }, []);
 
+  // On attend de connaître la photo définitive (valeur Supabase ou repli par
+  // défaut) avant de l'afficher, pour ne jamais montrer brièvement une photo
+  // différente de celle configurée.
   const photoSrc = cabinetImg
-    ?? '/images/Professeur TILLOU Caroline - TBS Education.webp';
+    ?? 'https://xuuvxhvmndkqkcmgptot.supabase.co/storage/v1/object/public/site-images/hero/c.tillou.webp';
 
   return (
     <>
@@ -172,12 +179,16 @@ export function AboutPage() {
             {/* Colonne droite : photo + points forts */}
             <div className="space-y-6 lg:sticky lg:top-24">
               <div className="overflow-hidden rounded-[1.75rem] border border-ink/10 bg-white p-3 shadow-[0_24px_60px_rgba(31,51,71,0.1)]">
-                <img
-                  src={photoSrc}
-                  alt="Caroline Tillou Maratuech — ACT&RH"
-                  onError={(e) => { e.currentTarget.src = '/images/caroline_portrait.webp'; }}
-                  className="aspect-[4/5] w-full rounded-[1.25rem] object-cover object-center"
-                />
+                {photoReady ? (
+                  <img
+                    src={photoSrc}
+                    alt="Caroline Tillou Maratuech — ACT&RH"
+                    onError={(e) => { e.currentTarget.src = '/images/caroline_portrait.webp'; }}
+                    className="aspect-[4/5] w-full rounded-[1.25rem] object-cover object-center"
+                  />
+                ) : (
+                  <div className="aspect-[4/5] w-full animate-pulse rounded-[1.25rem] bg-sand" />
+                )}
               </div>
 
               <Card className="bg-rosé border border-sand">

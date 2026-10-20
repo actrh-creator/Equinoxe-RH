@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.env.local
+.DS_Store
+*.log
+
+# Fichiers de conflit créés par la synchronisation iCloud Drive
+* [0-9].*
+* [0-9]
