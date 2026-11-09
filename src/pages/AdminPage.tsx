@@ -8,6 +8,8 @@ import {
 import { hasSupabaseConfig, supabase } from '../lib/supabaseClient';
 import { slugify } from '../lib/slugify';
 import { faqs as staticFaqs, posts, services, testimonials } from '../data/content';
+import { RichTextEditor } from '../components/RichTextEditor';
+import { ArticlePreview } from './BlogPages';
 import type { BlogPost, FAQ, Testimonial } from '../types';
 
 type Tab = 'dashboard' | 'articles' | 'contacts' | 'avis' | 'faqs' | 'stats' | 'settings';
@@ -232,6 +234,7 @@ function BlogAdmin() {
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [tagsInput, setTagsInput] = useState('');
+  const [preview, setPreview] = useState(false);
 
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 3000); };
   const load = useCallback(async () => {
@@ -252,7 +255,7 @@ function BlogAdmin() {
   useEffect(() => { load(); }, [load]);
 
   function startEdit(post: BlogPost) { setForm({ ...post }); setTagsInput((post.tags ?? []).join(', ')); setEditing(true); }
-  function cancel() { setEditing(false); setForm(EMPTY_POST); setTagsInput(''); }
+  function cancel() { setEditing(false); setPreview(false); setForm(EMPTY_POST); setTagsInput(''); }
 
   async function save() {
     if (!form.title?.trim()) return;
@@ -295,13 +298,22 @@ function BlogAdmin() {
         <div className="mb-6 flex items-center justify-between gap-4">
           <h1 className="font-serif text-3xl text-ink">{form.id ? "Modifier l'article" : 'Nouvel article'}</h1>
           <div className="flex gap-2">
+            <button onClick={() => setPreview((v) => !v)} className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold ${preview ? 'border-sage-dark bg-sage-dark text-white' : 'border-ink/15 hover:bg-white'}`}>
+              {preview ? <><Edit2 size={15} />Revenir à l'édition</> : <><Eye size={15} />Aperçu</>}
+            </button>
             <button onClick={cancel} className="rounded-full border border-ink/15 px-4 py-2 text-sm font-semibold hover:bg-white">Annuler</button>
             <button onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2 text-sm font-semibold text-white hover:bg-sage-dark disabled:opacity-60">
               <Save size={15} />{saving ? 'Enregistrement...' : 'Enregistrer'}
             </button>
           </div>
         </div>
-        <div className="grid gap-5 rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] md:p-8">
+        {preview ? (
+          <div className="overflow-hidden rounded-2xl border border-sand shadow-[0_8px_30px_rgba(0,0,0,0.05)]">
+            <p className="bg-ink px-4 py-2 text-center text-xs font-bold uppercase tracking-widest text-white">Aperçu — tel que l'article apparaîtra sur le site (rien n'est encore enregistré)</p>
+            <ArticlePreview post={{ ...EMPTY_POST, ...form, tags: tagsInput.split(',').map((t) => t.trim()).filter(Boolean) } as BlogPost} />
+          </div>
+        ) : null}
+        <div className={`grid gap-5 rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] md:p-8 ${preview ? 'hidden' : ''}`}>
           <CoverImageUploader title={form.title ?? ''} category={form.category ?? 'blog'} value={form.cover_image_url} onChange={(url) => setForm((f) => ({ ...f, cover_image_url: url }))} />
           <div className="grid gap-5 md:grid-cols-2">
             <Field label="Titre *"><input className="field" value={form.title ?? ''} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value, slug: slugify(e.target.value) }))} /></Field>
@@ -314,7 +326,11 @@ function BlogAdmin() {
             <Field label="Tags (virgule)"><input className="field" value={tagsInput} onChange={(e) => setTagsInput(e.target.value)} placeholder="management, RH, changement" /></Field>
           </div>
           <Field label="Extrait"><textarea className="field min-h-[80px] resize-y" value={form.excerpt ?? ''} onChange={(e) => setForm((f) => ({ ...f, excerpt: e.target.value }))} /></Field>
-          <Field label="Contenu"><textarea className="field min-h-[300px] resize-y font-mono text-sm" value={form.content ?? ''} onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))} /></Field>
+          <div className="grid gap-1.5 text-sm font-semibold text-ink">
+            Contenu
+            <RichTextEditor value={form.content ?? ''} onChange={(html) => setForm((f) => ({ ...f, content: html }))} />
+            <p className="text-xs font-normal text-anthracite/60">Vous pouvez coller directement un texte depuis Word : titres, gras, italique, souligné, listes et liens sont conservés, les polices et couleurs de Word sont remplacées par celles du site.</p>
+          </div>
           <div className="border-t border-sand pt-5">
             <p className="mb-4 text-xs font-bold uppercase tracking-widest text-sage-dark">SEO</p>
             <div className="grid gap-4 md:grid-cols-2">

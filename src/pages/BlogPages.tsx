@@ -6,6 +6,7 @@ import { SEOHead } from '../components/SEOHead';
 import { Container, Section } from '../components/ui';
 import { posts } from '../data/content';
 import { articleSchema, breadcrumbSchema } from '../lib/schemaMarkup';
+import { contentToHtml, contentToText } from '../lib/richText';
 import { useSupabaseRows } from '../hooks/useSupabaseRows';
 import type { BlogPost } from '../types';
 
@@ -189,7 +190,6 @@ export function ArticlePage() {
     .filter((item) => item.slug !== post.slug && (item.category === post.category || item.tags.some((tag) => post.tags.includes(tag))))
     .slice(0, 3);
   const [progress, setProgress] = useState(0);
-  const paragraphs = post.content.split('\n\n').filter(Boolean);
   const image = coverImage(post);
 
   useEffect(() => {
@@ -252,11 +252,7 @@ export function ArticlePage() {
         <Section className="bg-ivory">
           <Container className="grid gap-10 lg:grid-cols-3 lg:items-start">
             <div className="rounded-2xl border border-sand bg-white p-7 shadow-[0_22px_70px_rgba(14,27,41,0.06)] md:p-10 lg:col-span-2">
-              <div className="prose-actrh max-w-none">
-                {paragraphs.map((paragraph, index) => (
-                  <p key={`${post.slug}-${index}`}>{paragraph}</p>
-                ))}
-              </div>
+              <ArticleBody content={post.content} />
               <div className="mt-10 flex flex-wrap gap-2 border-t border-sand pt-6">
                 {post.tags.map((tag) => (
                   <span key={tag} className="rounded-full bg-rosé px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-sage-dark">
@@ -304,6 +300,48 @@ export function ArticlePage() {
   );
 }
 
+function ArticleBody({ content }: { content: string }) {
+  const html = useMemo(() => contentToHtml(content), [content]);
+  return <div className="prose-actrh max-w-none" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+/** Rendu fidèle de la page article (sans barre de progression), utilisé par l'aperçu de l'admin. */
+export function ArticlePreview({ post }: { post: BlogPost }) {
+  const image = coverImage(post);
+  return (
+    <article className="bg-white">
+      <Container className="py-10 md:py-12">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <header>
+            <p className="inline-flex rounded-full border border-sage-dark/20 bg-rosé px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">{post.category}</p>
+            <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-ink md:text-5xl">{post.title || 'Titre de l’article'}</h1>
+            <p className="mt-6 max-w-3xl text-xl leading-9 text-anthracite/75">{post.excerpt}</p>
+            <div className="mt-7 flex flex-wrap gap-4 text-sm font-semibold text-anthracite/65">
+              <span className="inline-flex items-center gap-2"><CalendarDays size={17} /> {formatDate(post.published_at)}</span>
+              <span className="inline-flex items-center gap-2"><Clock size={17} /> {readingTime(post.content)} min de lecture</span>
+            </div>
+          </header>
+          <div className="overflow-hidden rounded-2xl border border-sand bg-sand shadow-[0_24px_70px_rgba(14,27,41,0.08)]">
+            <img src={image} alt="" onError={(event) => { event.currentTarget.src = '/images/meeting_collaboration.webp'; }} className="aspect-[4/3] h-full w-full object-cover" />
+          </div>
+        </div>
+      </Container>
+      <div className="bg-ivory py-10 md:py-12">
+        <Container>
+          <div className="mx-auto max-w-3xl rounded-2xl border border-sand bg-white p-7 shadow-[0_22px_70px_rgba(14,27,41,0.06)] md:p-10">
+            <ArticleBody content={post.content} />
+            <div className="mt-10 flex flex-wrap gap-2 border-t border-sand pt-6">
+              {post.tags.map((tag) => (
+                <span key={tag} className="rounded-full bg-rosé px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-sage-dark">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </div>
+    </article>
+  );
+}
+
 function sortPosts(items: BlogPost[]) {
   return [...items].sort((a, b) => new Date(b.published_at ?? 0).getTime() - new Date(a.published_at ?? 0).getTime());
 }
@@ -313,7 +351,7 @@ function normalize(value: string) {
 }
 
 function readingTime(content: string) {
-  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  const words = contentToText(content).trim().split(/\s+/).filter(Boolean).length;
   return Math.max(2, Math.ceil(words / 210));
 }
 
