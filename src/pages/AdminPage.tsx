@@ -9,7 +9,7 @@ import { hasSupabaseConfig, supabase } from '../lib/supabaseClient';
 import { slugify } from '../lib/slugify';
 import { faqs as staticFaqs, posts, services, testimonials } from '../data/content';
 import { RichTextEditor } from '../components/RichTextEditor';
-import { ArticlePreview } from './BlogPages';
+import { ArticleView } from './BlogPages';
 import type { BlogPost, FAQ, Testimonial } from '../types';
 
 type Tab = 'dashboard' | 'articles' | 'contacts' | 'avis' | 'faqs' | 'stats' | 'settings';
@@ -310,7 +310,9 @@ function BlogAdmin() {
         {preview ? (
           <div className="overflow-hidden rounded-2xl border border-sand shadow-[0_8px_30px_rgba(0,0,0,0.05)]">
             <p className="bg-ink px-4 py-2 text-center text-xs font-bold uppercase tracking-widest text-white">Aperçu — tel que l'article apparaîtra sur le site (rien n'est encore enregistré)</p>
-            <ArticlePreview post={{ ...EMPTY_POST, ...form, tags: tagsInput.split(',').map((t) => t.trim()).filter(Boolean) } as BlogPost} />
+            <div onClickCapture={(e) => { if ((e.target as HTMLElement).closest('a')) e.preventDefault(); }}>
+              <ArticleView post={{ ...EMPTY_POST, ...form, tags: tagsInput.split(',').map((t) => t.trim()).filter(Boolean) } as BlogPost} />
+            </div>
           </div>
         ) : null}
         <div className={`grid gap-5 rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] md:p-8 ${preview ? 'hidden' : ''}`}>

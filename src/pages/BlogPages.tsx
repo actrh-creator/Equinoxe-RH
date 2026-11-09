@@ -220,63 +220,7 @@ export function ArticlePage() {
         <div className="h-full bg-sage-dark transition-[width] duration-150" style={{ width: `${progress}%` }} />
       </div>
 
-      <article className="bg-white">
-        <Container className="py-12 md:py-16">
-          <nav className="flex flex-wrap items-center gap-2 text-sm font-semibold text-anthracite/60" aria-label="Fil d’Ariane">
-            <Link to="/" className="hover:text-sage-dark">Accueil</Link>
-            <ChevronRight size={15} />
-            <Link to="/blog" className="hover:text-sage-dark">Ressources RH</Link>
-            <ChevronRight size={15} />
-            <span className="text-ink">{post.category}</span>
-          </nav>
-
-          <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-start">
-            <header>
-              <p className="inline-flex rounded-full border border-sage-dark/20 bg-rosé px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">
-                {post.category}
-              </p>
-              <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-ink md:text-6xl">{post.title}</h1>
-              <p className="mt-6 max-w-3xl text-xl leading-9 text-anthracite/75">{post.excerpt}</p>
-              <div className="mt-7 flex flex-wrap gap-4 text-sm font-semibold text-anthracite/65">
-                <span className="inline-flex items-center gap-2"><CalendarDays size={17} /> {formatDate(post.published_at)}</span>
-                <span className="inline-flex items-center gap-2"><Clock size={17} /> {readingTime(post.content)} min de lecture</span>
-                <span className="inline-flex items-center gap-2"><BookOpen size={17} /> Progression {Math.round(progress)}%</span>
-              </div>
-            </header>
-            <div className="overflow-hidden rounded-2xl border border-sand bg-sand shadow-[0_24px_70px_rgba(14,27,41,0.08)]">
-              <img src={image} alt="" onError={(event) => { event.currentTarget.src = '/images/meeting_collaboration.webp'; }} className="aspect-[4/3] h-full w-full object-cover" />
-            </div>
-          </div>
-        </Container>
-
-        <Section className="bg-ivory">
-          <Container className="grid gap-10 lg:grid-cols-3 lg:items-start">
-            <div className="rounded-2xl border border-sand bg-white p-7 shadow-[0_22px_70px_rgba(14,27,41,0.06)] md:p-10 lg:col-span-2">
-              <ArticleBody content={post.content} />
-              <div className="mt-10 flex flex-wrap gap-2 border-t border-sand pt-6">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-rosé px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-sage-dark">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <aside className="sticky top-28 rounded-2xl border border-sand bg-white p-6 shadow-[0_18px_50px_rgba(14,27,41,0.05)]">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">Dans cet article</p>
-              <div className="mt-4 h-2 rounded-full bg-rosé">
-                <div className="h-full rounded-full bg-sage-dark transition-[width] duration-150" style={{ width: `${progress}%` }} />
-              </div>
-              <p className="mt-4 text-sm leading-6 text-anthracite/70">
-                Temps estimé : {readingTime(post.content)} minutes. La barre suit votre avancée dans la lecture.
-              </p>
-              <Link to="/contact" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-sage px-5 py-3 text-sm font-bold text-white transition hover:bg-sage-dark">
-                Échanger sur ce sujet <ArrowRight size={15} />
-              </Link>
-            </aside>
-          </Container>
-        </Section>
-      </article>
+      <ArticleView post={post} progress={progress} />
 
       {relatedPosts.length > 0 ? (
         <Section className="bg-white">
@@ -305,20 +249,31 @@ function ArticleBody({ content }: { content: string }) {
   return <div className="prose-actrh max-w-none" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-/** Rendu fidèle de la page article (sans barre de progression), utilisé par l'aperçu de l'admin. */
-export function ArticlePreview({ post }: { post: BlogPost }) {
+/** Mise en page de l'article, partagée entre la page publique et l'aperçu de l'admin. */
+export function ArticleView({ post, progress = 0 }: { post: BlogPost; progress?: number }) {
   const image = coverImage(post);
   return (
     <article className="bg-white">
-      <Container className="py-10 md:py-12">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+      <Container className="py-12 md:py-16">
+        <nav className="flex flex-wrap items-center gap-2 text-sm font-semibold text-anthracite/60" aria-label="Fil d’Ariane">
+          <Link to="/" className="hover:text-sage-dark">Accueil</Link>
+          <ChevronRight size={15} />
+          <Link to="/blog" className="hover:text-sage-dark">Ressources RH</Link>
+          <ChevronRight size={15} />
+          <span className="text-ink">{post.category}</span>
+        </nav>
+
+        <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-start">
           <header>
-            <p className="inline-flex rounded-full border border-sage-dark/20 bg-rosé px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">{post.category}</p>
-            <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-ink md:text-5xl">{post.title || 'Titre de l’article'}</h1>
+            <p className="inline-flex rounded-full border border-sage-dark/20 bg-rosé px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">
+              {post.category}
+            </p>
+            <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-ink md:text-6xl">{post.title}</h1>
             <p className="mt-6 max-w-3xl text-xl leading-9 text-anthracite/75">{post.excerpt}</p>
             <div className="mt-7 flex flex-wrap gap-4 text-sm font-semibold text-anthracite/65">
               <span className="inline-flex items-center gap-2"><CalendarDays size={17} /> {formatDate(post.published_at)}</span>
               <span className="inline-flex items-center gap-2"><Clock size={17} /> {readingTime(post.content)} min de lecture</span>
+              <span className="inline-flex items-center gap-2"><BookOpen size={17} /> Progression {Math.round(progress)}%</span>
             </div>
           </header>
           <div className="overflow-hidden rounded-2xl border border-sand bg-sand shadow-[0_24px_70px_rgba(14,27,41,0.08)]">
@@ -326,18 +281,34 @@ export function ArticlePreview({ post }: { post: BlogPost }) {
           </div>
         </div>
       </Container>
-      <div className="bg-ivory py-10 md:py-12">
-        <Container>
-          <div className="mx-auto max-w-3xl rounded-2xl border border-sand bg-white p-7 shadow-[0_22px_70px_rgba(14,27,41,0.06)] md:p-10">
+
+      <Section className="bg-ivory">
+        <Container className="grid gap-10 lg:grid-cols-3 lg:items-start">
+          <div className="rounded-2xl border border-sand bg-white p-7 shadow-[0_22px_70px_rgba(14,27,41,0.06)] md:p-10 lg:col-span-2">
             <ArticleBody content={post.content} />
             <div className="mt-10 flex flex-wrap gap-2 border-t border-sand pt-6">
               {post.tags.map((tag) => (
-                <span key={tag} className="rounded-full bg-rosé px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-sage-dark">{tag}</span>
+                <span key={tag} className="rounded-full bg-rosé px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-sage-dark">
+                  {tag}
+                </span>
               ))}
             </div>
           </div>
+
+          <aside className="sticky top-28 rounded-2xl border border-sand bg-white p-6 shadow-[0_18px_50px_rgba(14,27,41,0.05)]">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-sage-dark">Dans cet article</p>
+            <div className="mt-4 h-2 rounded-full bg-rosé">
+              <div className="h-full rounded-full bg-sage-dark transition-[width] duration-150" style={{ width: `${progress}%` }} />
+            </div>
+            <p className="mt-4 text-sm leading-6 text-anthracite/70">
+              Temps estimé : {readingTime(post.content)} minutes. La barre suit votre avancée dans la lecture.
+            </p>
+            <Link to="/contact" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-sage px-5 py-3 text-sm font-bold text-white transition hover:bg-sage-dark">
+              Échanger sur ce sujet <ArrowRight size={15} />
+            </Link>
+          </aside>
         </Container>
-      </div>
+      </Section>
     </article>
   );
 }
